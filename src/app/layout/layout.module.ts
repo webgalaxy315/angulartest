@@ -6,7 +6,7 @@ import { LayoutComponent } from './layout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [NavbarComponent, LayoutComponent],
+  declarations: [LayoutComponent, NavbarComponent],
   imports: [CommonModule, RouterModule],
   exports: [LayoutComponent]
 })
