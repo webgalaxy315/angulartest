@@ -6,7 +6,14 @@ import { LayoutComponent } from './layout/layout.component';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/video-game/video-game.module').then(m => m.VideoGameModule)
+      },
+      { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) }
+    ]
   }
 ];
 
