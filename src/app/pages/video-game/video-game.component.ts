@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VideoGameService } from '../../core/services/video-game.service';
-import { VideoGame } from '../../core/models/video-game.model';
+import { VideoGamesStateService } from './video-game-state.service';
 
 @Component({
   selector: 'app-video-game',
@@ -9,16 +8,12 @@ import { VideoGame } from '../../core/models/video-game.model';
   styleUrls: ['./video-game.component.scss']
 })
 export class VideoGameComponent implements OnInit {
-  videoGames: VideoGame[] = [];
-  isLoading = false;
+  videoGames$ = this.videoGamesStateService.videoGames$;
+  isLoading$ = this.videoGamesStateService.isLoading$;
 
-  constructor(private videoGameService: VideoGameService) {
-    this.isLoading = true;
-    this.videoGameService.getVideoGames().subscribe(res => {
-      this.videoGames = res;
-      this.isLoading = false;
-    });
+  constructor(private videoGamesStateService: VideoGamesStateService) {}
+
+  ngOnInit(): void {
+    this.videoGamesStateService.load();
   }
-
-  ngOnInit(): void {}
 }
